@@ -4,3 +4,5 @@ csv
 random
 vk_api
 vk_api.longpoll
+psycopg2
+sqlalchemy
