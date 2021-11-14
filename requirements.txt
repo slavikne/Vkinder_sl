@@ -1,3 +1,6 @@
 json
-hashlib
+requests
 csv
+random
+vk_api
+vk_api.longpoll
