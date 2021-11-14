@@ -1,0 +1,5 @@
+.idea/
+venv/
+__pycache__
+token_vk_group.txt
+token_vk_user.txt
