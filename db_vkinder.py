@@ -81,3 +81,5 @@ class DB:
                                                 where u_vk_id = {id_user}
                                                 limit 1;""").fetchall()
         return res
+
+    # def cleaning_DB(self):

@@ -83,7 +83,7 @@ def show_result_search(result_found, user_id):
 
     sample = 0
     for search_user in result_found:
-        print(search_user)
+        
         # Проверка на наличие пользователя в базе  и в черном списке
         query_select = db.select_db(search_user[0], user_id)
         query_select_in_bl = db.select_bl(search_user[0], user_id)
@@ -103,7 +103,6 @@ def show_result_search(result_found, user_id):
                 db.added_photo_found_user(photo_param[i]['id_photo'], photo_param[i]['owner_id'])
                 i += 1
 
-        print(sample)
         # Выход из цикла после вывода 5 результатов поиска
         if sample >= 5:
             sample = 0
@@ -152,10 +151,14 @@ def show_favorites(user_id, message):
 
     write_msg(user_id, f" {vkbot.bot(message)[0]}")
     query_select_in_favorites = db.show_select_favorites(user_id)
-    for favor in query_select_in_favorites:
-        write_msg(user_id, f'https://vk.com/id{favor[0]}')
-        q_sel_in_ph = db.show_select_photo(favor[0])
-        photo_msg(user_id, q_sel_in_ph[0][1], q_sel_in_ph[0][0])
+    if len(query_select_in_favorites) < 1:
+        write_msg(user_id, f"К сожалению список избраных пуст. Сначала добавь туда кого-нибудь.")
+    else:
+        for favor in query_select_in_favorites:
+            write_msg(user_id, f'https://vk.com/id{favor[0]}')
+            q_sel_in_ph = db.show_select_photo(favor[0])
+            if len(q_sel_in_ph) > 0:
+                photo_msg(user_id, q_sel_in_ph[0][1], q_sel_in_ph[0][0])
 
 
 def main():
